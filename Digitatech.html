@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space-Themed Digital Clock</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Overall dark space theme */
+body {
+    background-image: url("https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg");
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden; /* Prevent scroll for space background */
+}
+
+/* Star field background effect */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://cdn.mos.cms.futurecdn.net/HuGGeENt6kGyixe3hT9tnY.jpg");
+    background-size: cover;
+    z-index: -1; /* Place stars behind the clock */
+}
+
+/* Clock container with cosmic glow */
+.clock-container {
+    border: 3px solid rgba(0, 255, 234, 0.5);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 255, 234, 0.7), 0 0 100px rgba(0, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+}
+
+/* Digital clock time styling */
+#time {
+    font-size: 5rem;
+    color: #00ffea; /* Neon blue for time */
+    text-shadow: 0 0 20px #00ffea, 0 0 30px rgba(0, 255, 234, 0.8);
+}
+
+/* Date styling */
+#date {
+    font-size: 1.5rem;
+    color: #ffffff; /* White text for date */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Hover effect for the clock - intensifying glow */
+.clock-container:hover {
+    box-shadow: 0 0 70px rgba(0, 255, 255, 0.9), 0 0 120px rgba(0, 255, 255, 0.6);
+}
+
+/* Optional: Add floating animation to the clock for a space-like feel */
+.clock-container {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+</style>
+</head>
+<body class="bg-dark text-light">
+    <div class="stars"></div> <!-- Space background effect -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="clock-container">
+            <div id="time" class="display-1 text-center"></div>
+            <div id="date" class="lead text-center"></div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = now.toLocaleString('default', { month: 'short' });
+    const year = now.getFullYear();
+
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    const dateString = `${day} ${month} ${year}`;
+
+    document.getElementById('time').textContent = timeString;
+    document.getElementById('date').textContent = dateString;
+}
+
+// Update clock every second
+setInterval(updateClock, 1000);
+updateClock(); // Initial call
+
+    </script>
+</body>
+</html>
