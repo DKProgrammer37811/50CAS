@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Eternal Valentine ❤️</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    .gradient-background {
+      background: linear-gradient(135deg, #ff85a2 0%, #ffc2cd 100%);
+    }
+
+    .heart-float {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-100px) rotate(20deg); }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .romantic-text {
+      font-family: 'Dancing Script', cursive;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .heart-border {
+      border: 3px solid #ff4d6d;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
+    }
+
+    .bounce {
+      animation: bounce 0.5s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  </style>
+</head>
+<body class="gradient-background min-h-screen overflow-hidden">
+  <!-- Floating Hearts -->
+  <div class="heart-float" style="left: 10%">❤️</div>
+  <div class="heart-float" style="left: 30%; animation-delay: -2s">💖</div>
+  <div class="heart-float" style="left: 50%; animation-delay: -4s">💕</div>
+  <div class="heart-float" style="left: 70%; animation-delay: -1s">💝</div>
+  <div class="heart-float" style="left: 90%; animation-delay: -3s">💘</div>
+
+  <div class="flex items-center justify-center min-h-screen fade-in">
+    <div class="flex flex-col items-center p-8 bg-white/30 backdrop-blur-sm heart-border rounded-2xl mx-4">
+      <img id="imageDisplay" src="./images/image1.gif" alt="Our Love" 
+           class="rounded-lg h-[300px] w-[300px] object-cover pulse shadow-xl" />
+      
+      <h2 id="valentineQuestion" class="romantic-text text-5xl font-bold text-[#ff4d6d] my-6 mt-8">
+        My Dearest Love, Will You Be My Forever Valentine? 🌹
+      </h2>
+
+      <div class="flex gap-6 pt-6 items-center" id="responseButtons">
+        <button id="yesButton"
+          class="romantic-text bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-full
+                 text-3xl hover:scale-105 transition-transform duration-300 disabled:pointer-events-none 
+                 disabled:opacity-50 hover:bg-[#ff4d6d] h-16 min-w-[120px] px-8 py-4 bg-[#ff758f] 
+                 text-white shadow-lg hover:shadow-xl gap-2">
+          Yes 💖
+        </button>
+        <button id="noButton"
+          class="romantic-text inline-flex items-center justify-center whitespace-nowrap rounded-full
+                 text-2xl transition-all duration-300 disabled:pointer-events-none hover:scale-95 
+                 disabled:opacity-50 h-12 min-w-[100px] px-6 py-3 bg-white/30 text-[#ff4d6d] 
+                 border-2 border-[#ff4d6d] hover:bg-white/50 hover:shadow-lg">
+          No 😢
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    
+    const imagePaths = [
+      './images/image1.gif',
+      './images/image2.gif',
+      './images/image3.gif',
+      './images/image4.gif',
+      './images/image5.gif',
+      './images/image6.gif'
+    ];
+    
+    let noClickCount = 0;
+    let isRunningAway = false;
+    const escapeSpeed = 3;
+    const responseMessages = [
+      "No 😢", "Really? 💔", "My heart aches...", 
+      "I'll love you more! 💘", "Can't live without you", 
+      "You're my soulmate 🌹"
+    ];
+  
+    // No button movement handler
+    function moveButtonAway(e) {
+      if (!isRunningAway) return;
+      
+      const noButton = document.getElementById('noButton');
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      const buttonRect = noButton.getBoundingClientRect();
+      const buttonX = buttonRect.left + buttonRect.width/2;
+      const buttonY = buttonRect.top + buttonRect.height/2;
+      
+      // Calculate distance between cursor and button
+      const deltaX = mouseX - buttonX;
+      const deltaY = mouseY - buttonY;
+      const distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+      
+      // If cursor is close, move button away
+      if (distance < 150) {
+        const angle = Math.atan2(deltaY, deltaX);
+        const newX = buttonRect.left - Math.cos(angle) * escapeSpeed;
+        const newY = buttonRect.top - Math.sin(angle) * escapeSpeed;
+        
+        // Keep button within viewport
+        const boundedX = Math.max(0, Math.min(window.innerWidth - buttonRect.width, newX));
+        const boundedY = Math.max(0, Math.min(window.innerHeight - buttonRect.height, newY));
+        
+        noButton.style.position = 'fixed';
+        noButton.style.left = `${boundedX}px`;
+        noButton.style.top = `${boundedY}px`;
+      }
+    }
+  
+    yesButton.addEventListener('click', () => {
+      // Confetti explosion
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Update text and image
+      valentineQuestion.textContent = "Yay! You made me the happiest! 💖";
+      imageDisplay.src = imagePaths[imagePaths.length - 1];
+      imageDisplay.classList.add('bounce');
+
+      // Hide buttons
+      responseButtons.style.display = 'none';
+
+      // Add floating hearts
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = '💖';
+        heart.classList.add('heart-float');
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.animationDelay = `-${Math.random() * 6}s`;
+        document.body.appendChild(heart);
+      }
+    });
+  
+    noButton.addEventListener('click', function() {
+      if (noClickCount >= responseMessages.length - 1) {
+        isRunningAway = true;
+        document.addEventListener('mousemove', moveButtonAway);
+        noButton.style.transition = 'all 0.3s';
+        return;
+      }
+      
+      // Update button text and image
+      noButton.textContent = responseMessages[noClickCount];
+      imageDisplay.src = imagePaths[noClickCount + 1];
+      imageDisplay.classList.add('shake');
+      
+      // Scale buttons
+      yesButton.style.transform = `scale(${1 + noClickCount*0.3})`;
+      noButton.style.transform = `scale(${1 - noClickCount*0.15})`;
+      
+      // Add hearts to Yes button
+      yesButton.innerHTML = `Yes ${'💖'.repeat(noClickCount + 1)}`;
+      
+      noClickCount++;
+      
+      // Enable fleeing mode after last message
+      if (noClickCount === responseMessages.length - 1) {
+        noButton.textContent = "Try to catch me! 😉";
+        noButton.style.position = 'fixed';
+        noButton.style.cursor = 'pointer';
+        noButton.style.transition = 'left 0.3s, top 0.3s';
+      }
+    });
+  
+    // Keep button within screen bounds
+    function keepInBounds(element) {
+      const rect = element.getBoundingClientRect();
+      if (rect.left < 0) element.style.left = '0';
+      if (rect.top < 0) element.style.top = '0';
+      if (rect.right > window.innerWidth) element.style.left = window.innerWidth - rect.width + 'px';
+      if (rect.bottom > window.innerHeight) element.style.top = window.innerHeight - rect.height + 'px';
+    }
+  </script>
+     
+</body>
+</html>
