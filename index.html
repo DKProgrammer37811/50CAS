@@ -1,233 +1,787 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Eternal Valentine ❤️</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-  <style>
-    .gradient-background {
-      background: linear-gradient(135deg, #ff85a2 0%, #ffc2cd 100%);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ChildLife — Where Play Meets Healing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --pk:#E8609A;--pk2:#C93F7A;--pkl:#F9D4E6;--pkp:#FEF0F7;--pkpp:#fff7fb;
+  --lm:#8DC63F;--lm2:#6FA52E;--lml:#EBF5D5;--lmll:#f4fbe8;
+  --tl:#00A99D;--tl2:#007F76;--tll:#D5F2F0;
+  --nv:#3D2484;--nv2:#2B1860;--nvm:#5C3DBF;--nvl:#EDE8FF;
+  --am:#FFB347;--aml:#FFF4E0;
+  --wh:#fff;--of:#fdfcff;
+  --bdy:#3a2f5a;--sub:#7c6fa5;
+  --r-pill:100px;--r-xl:28px;--r-lg:20px;--r-md:14px;
+  --sh-pk:0 16px 48px rgba(232,96,154,.2);
+  --sh-card:0 8px 32px rgba(61,36,132,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Nunito',sans-serif;background:var(--of);color:var(--bdy);overflow-x:hidden}
 
-    .heart-float {
-      position: absolute;
-      animation: float 6s ease-in-out infinite;
-      opacity: 0.7;
-    }
+#pb{position:fixed;top:0;left:0;height:3px;z-index:9999;width:0;background:linear-gradient(90deg,var(--pk),var(--lm),var(--tl));border-radius:0 3px 3px 0;transition:width .12s linear}
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-100px) rotate(20deg); }
-    }
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;height:72px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;transition:all .35s cubic-bezier(.23,1,.32,1)}
+nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(232,96,154,.08),0 4px 24px rgba(61,36,132,.06)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo img{height:44px;width:44px;object-fit:contain}
+.nav-brand{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--nv);letter-spacing:-.3px}
+.nav-brand span{color:var(--pk)}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none}
+.nav-links a{font-size:13px;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:var(--r-pill);color:var(--sub);transition:all .2s}
+.nav-links a:hover{background:var(--pkp);color:var(--pk)}
+.nav-cta{background:var(--pk);color:#fff;padding:9px 22px;border-radius:var(--r-pill);font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(232,96,154,.35);transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,96,154,.45)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none}
+.hamburger span{width:24px;height:2.5px;background:var(--nv);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);padding:20px 5vw 28px;box-shadow:0 8px 32px rgba(61,36,132,.1);z-index:999;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:15px;font-weight:700;color:var(--bdy);text-decoration:none;padding:11px 16px;border-radius:var(--r-lg);transition:all .2s}
+.mobile-menu a:hover{background:var(--pkp);color:var(--pk)}
+.mobile-menu .nav-cta{margin-top:8px;text-align:center}
 
-    .pulse {
-      animation: pulse 2s infinite;
-    }
+/* HERO — very light */
+.hero{min-height:100vh;background:linear-gradient(155deg,#ffffff 0%,#fff5fa 35%,#f5f0ff 65%,#e8f9f7 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 5vw 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,96,154,.1) 1.5px,transparent 1.5px);background-size:36px 36px;pointer-events:none}
+.hblob{position:absolute;border-radius:50%;filter:blur(72px);pointer-events:none}
+.hb1{width:480px;height:480px;background:rgba(232,96,154,.12);top:-140px;right:-80px;animation:bblob 16s ease-in-out infinite}
+.hb2{width:320px;height:320px;background:rgba(141,198,63,.1);bottom:-80px;left:-60px;animation:bblob 20s ease-in-out infinite reverse}
+.hb3{width:200px;height:200px;background:rgba(0,169,157,.09);top:45%;right:10%;animation:bblob 12s ease-in-out infinite 3s}
+.hb4{width:260px;height:260px;background:rgba(92,61,191,.07);bottom:20%;left:15%;animation:bblob 14s ease-in-out infinite 5s}
+@keyframes bblob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(24px,-16px) scale(1.06)}66%{transform:translate(-16px,24px) scale(.95)}}
+.hdeco{position:absolute;font-size:36px;animation:flt 5s ease-in-out infinite;opacity:.65;pointer-events:none;user-select:none}
+@keyframes flt{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-16px) rotate(var(--r,0deg))}}
+.hd1{top:16%;left:4%;--r:-10deg;animation-delay:0s}
+.hd2{top:22%;right:4%;--r:12deg;animation-delay:1.4s}
+.hd3{bottom:22%;left:5%;--r:-6deg;animation-delay:2.8s}
+.hd4{bottom:16%;right:5%;--r:14deg;animation-delay:.8s}
+.hd5{top:55%;left:2%;--r:-4deg;font-size:28px;animation-delay:3.6s}
+.hd6{top:40%;right:3%;--r:8deg;font-size:28px;animation-delay:2s}
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+.hero-inner{position:relative;z-index:2;max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:white;border:1.5px solid rgba(232,96,154,.2);color:var(--pk2);font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 20px;border-radius:var(--r-pill);margin-bottom:28px;animation:fadeUp .5s ease both;box-shadow:0 4px 16px rgba(232,96,154,.1)}
+.bdot{width:7px;height:7px;background:var(--lm);border-radius:50%;box-shadow:0 0 6px var(--lm);animation:dotP 2s infinite}
+@keyframes dotP{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.8)}}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7.5vw,100px);font-weight:700;line-height:.98;color:var(--nv);margin-bottom:26px;animation:fadeUp .6s .08s ease both;letter-spacing:-.02em}
+.hero-title em{font-style:italic;background:linear-gradient(120deg,var(--pk),var(--pk2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title .lm-em{font-style:italic;background:linear-gradient(120deg,var(--lm2),var(--tl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17px;color:var(--sub);line-height:1.8;max-width:580px;margin:0 auto 42px;font-weight:400;animation:fadeUp .6s .16s ease both}
+.hero-acts{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .6s .24s ease both}
+.btn-pk{background:var(--pk);color:#fff;padding:15px 36px;border-radius:var(--r-pill);font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;box-shadow:var(--sh-pk);transition:transform .22s,box-shadow .22s;font-family:'Nunito',sans-serif}
+.btn-pk:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 0 8px rgba(232,96,154,.1),0 20px 48px rgba(232,96,154,.32)}
+.btn-out{border:2px solid var(--pk);color:var(--pk);padding:13px 30px;border-radius:var(--r-pill);font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:all .22s;background:white;font-family:'Nunito',sans-serif}
+.btn-out:hover{background:var(--pk);color:#fff}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:56px;padding-top:36px;border-top:1.5px solid rgba(232,96,154,.12);animation:fadeUp .6s .32s ease both;flex-wrap:wrap}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:var(--nv);line-height:1}
+.stat-n span{color:var(--pk)}
+.stat-l{font-size:11.5px;color:var(--sub);font-weight:700;margin-top:5px;text-transform:uppercase;letter-spacing:.08em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
 
-    .fade-in {
-      animation: fadeIn 1.5s ease-out;
-    }
+.rainbow{height:5px;background:linear-gradient(90deg,var(--pk),var(--am),var(--lm),var(--tl),var(--nvm),var(--pk))}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* MARQUEE */
+.mq{background:linear-gradient(90deg,var(--nv2),var(--nv),var(--nvm));padding:16px 0;overflow:hidden;position:relative}
+.mq::before,.mq::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
+.mq::before{left:0;background:linear-gradient(90deg,var(--nv2),transparent)}
+.mq::after{right:0;background:linear-gradient(-90deg,var(--nv2),transparent)}
+.mq-inner{display:flex;animation:mqa 28s linear infinite;width:max-content}
+.mq-item{padding:0 36px;font-size:12px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.5);text-transform:uppercase;display:flex;align-items:center;gap:14px;white-space:nowrap}
+.mq-item::after{content:'♥';color:var(--pk);font-size:9px}
+@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    .romantic-text {
-      font-family: 'Dancing Script', cursive;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    }
+/* UTILS */
+section{padding:100px 5vw}
+.stag{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pk);margin-bottom:16px}
+.stag::before{content:'';width:22px;height:3px;background:linear-gradient(90deg,var(--pk),var(--lm));border-radius:3px}
+.stit{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.2vw,58px);font-weight:700;color:var(--nv);line-height:1.06}
+.stit em{color:var(--pk);font-style:italic}
+.ssub{font-size:16px;color:var(--sub);max-width:520px;margin-top:14px;line-height:1.8;font-weight:400}
+.reveal{opacity:0;transform:translateY(48px);transition:opacity .85s cubic-bezier(.23,1,.32,1),transform .85s cubic-bezier(.23,1,.32,1)}
+.reveal-l{opacity:0;transform:translateX(-48px);transition:opacity .85s cubic-bezier(.23,1,.32,1),transform .85s cubic-bezier(.23,1,.32,1)}
+.reveal-r{opacity:0;transform:translateX(48px);transition:opacity .85s cubic-bezier(.23,1,.32,1),transform .85s cubic-bezier(.23,1,.32,1)}
+.reveal-s{opacity:0;transform:scale(.9);transition:opacity .85s cubic-bezier(.23,1,.32,1),transform .85s cubic-bezier(.23,1,.32,1)}
+.revealed{opacity:1!important;transform:none!important}
+.btn-pks{background:linear-gradient(135deg,var(--pk),var(--nvm));color:#fff;padding:14px 32px;border-radius:var(--r-pill);font-weight:800;font-size:14.5px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;box-shadow:var(--sh-pk);transition:transform .22s,box-shadow .22s;font-family:'Nunito',sans-serif}
+.btn-pks:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 0 8px rgba(232,96,154,.1),0 20px 48px rgba(232,96,154,.28)}
+.btn-outs{border:2px solid var(--pk);color:var(--pk);padding:12px 28px;border-radius:var(--r-pill);font-weight:800;font-size:14.5px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:all .22s;font-family:'Nunito',sans-serif}
+.btn-outs:hover{background:var(--pk);color:#fff}
 
-    .heart-border {
-      border: 3px solid #ff4d6d;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
-    }
+/* SERVICES */
+.services{background:white;position:relative;overflow:hidden}
+.services::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(141,198,63,.09) 1.5px,transparent 1.5px);background-size:40px 40px;pointer-events:none}
+.services::after{content:'';position:absolute;top:-100px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,var(--pkp) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;position:relative;z-index:2}
+.srv-card{background:white;border-radius:var(--r-xl);padding:34px 28px;border:2px solid transparent;box-shadow:var(--sh-card);transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;cursor:default}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.srv-card:hover{transform:translateY(-10px) scale(1.015)}
+.srv-ico{width:60px;height:60px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+.srv-n{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--nv);margin-bottom:8px;line-height:1.2}
+.srv-d{font-size:14px;color:var(--sub);line-height:1.7}
+.sc1::before{background:linear-gradient(90deg,var(--pk),var(--pkl))}.sc1 .srv-ico{background:var(--pkp)}.sc1:hover{border-color:var(--pk);box-shadow:0 24px 64px rgba(232,96,154,.16)}
+.sc2::before{background:linear-gradient(90deg,var(--lm),var(--lml))}.sc2 .srv-ico{background:var(--lml)}.sc2:hover{border-color:var(--lm);box-shadow:0 24px 64px rgba(141,198,63,.16)}
+.sc3::before{background:linear-gradient(90deg,var(--tl),var(--tll))}.sc3 .srv-ico{background:var(--tll)}.sc3:hover{border-color:var(--tl);box-shadow:0 24px 64px rgba(0,169,157,.16)}
+.sc4::before{background:linear-gradient(90deg,var(--am),var(--aml))}.sc4 .srv-ico{background:var(--aml)}.sc4:hover{border-color:var(--am);box-shadow:0 24px 64px rgba(255,179,71,.16)}
+.sc5::before{background:linear-gradient(90deg,var(--nvm),var(--nvl))}.sc5 .srv-ico{background:var(--nvl)}.sc5:hover{border-color:var(--nvm);box-shadow:0 24px 64px rgba(92,61,191,.16)}
+.sc6::before{background:linear-gradient(90deg,var(--pk2),var(--pkp))}.sc6 .srv-ico{background:var(--pkp)}.sc6:hover{border-color:var(--pk2);box-shadow:0 24px 64px rgba(201,63,122,.16)}
 
-    .bounce {
-      animation: bounce 0.5s;
-    }
+/* ABOUT */
+.about{background:linear-gradient(155deg,#fff7fb 0%,white 40%,#f4fbe8 100%);position:relative;overflow:hidden}
+.about::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,96,154,.07) 2px,transparent 2px);background-size:38px 38px;pointer-events:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:2}
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+/* Doctor stage */
+.doctor-stage{position:relative;width:100%;height:560px;cursor:grab;user-select:none}
+.doctor-stage:active{cursor:grabbing}
+.stage-bg{position:absolute;inset:0;border-radius:var(--r-xl);background:linear-gradient(145deg,#fff8fe,#edfbf9);overflow:hidden;box-shadow:0 30px 90px rgba(61,36,132,.12);transition:transform .12s ease-out}
+.stage-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(141,198,63,.14) 1.5px,transparent 1.5px);background-size:28px 28px}
+.stage-floor{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(141,198,63,.13),transparent);border-radius:0 0 var(--r-xl) var(--r-xl)}
+.stage-rainbow{position:absolute;bottom:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--pk),var(--am),var(--lm),var(--tl),var(--nvm));border-radius:0 0 var(--r-xl) var(--r-xl)}
+.sfloat{position:absolute;font-size:32px;animation:flt 5s ease-in-out infinite;pointer-events:none}
+.sf1{top:8%;left:6%;animation-delay:0s;font-size:36px}
+.sf2{top:10%;right:8%;animation-delay:1.6s;font-size:28px}
+.sf3{top:45%;left:4%;animation-delay:3s;font-size:24px}
+.doc-wrap{position:absolute;bottom:68px;left:50%;transform:translateX(-50%);width:240px;height:380px;transform-style:preserve-3d;will-change:transform;transform-origin:center bottom}
+.doc-svg{width:100%;height:100%;filter:drop-shadow(0 28px 36px rgba(61,36,132,.16))}
+.bubble{position:absolute;background:white;border-radius:var(--r-lg);padding:9px 15px;box-shadow:0 10px 32px rgba(61,36,132,.14);font-size:12px;font-weight:800;color:var(--nv);white-space:nowrap;animation:bfloat 4s ease-in-out infinite;pointer-events:none;border:1.5px solid rgba(232,96,154,.1)}
+.b1{bottom:350px;left:-74px;animation-delay:0s}
+.b2{bottom:305px;right:-68px;animation-delay:-1.8s}
+.b3{bottom:205px;left:-84px;animation-delay:-3.2s}
+.b4{bottom:160px;right:-72px;animation-delay:-0.9s}
+@keyframes bfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.stage-tip{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11.5px;color:var(--sub);font-weight:700;opacity:.55;letter-spacing:.04em}
 
-    .shake {
-      animation: shake 0.5s;
-    }
+.about-text .alist{list-style:none;margin:28px 0 36px;display:flex;flex-direction:column;gap:12px}
+.about-text .alist li{display:flex;align-items:flex-start;gap:14px;font-size:15px;color:var(--bdy);line-height:1.7;padding:16px 20px;background:white;border-radius:var(--r-lg);border:1.5px solid rgba(232,96,154,.09);box-shadow:0 4px 12px rgba(232,96,154,.05);transition:all .3s cubic-bezier(.23,1,.32,1)}
+.about-text .alist li:hover{transform:translateX(7px);border-color:var(--pk);box-shadow:var(--sh-pk)}
+.lico{min-width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.aacts{display:flex;gap:14px;flex-wrap:wrap}
 
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-10px); }
-      75% { transform: translateX(10px); }
-    }
-  </style>
+/* FOUNDERS */
+.founders{background:linear-gradient(155deg,var(--nv2) 0%,#251060 50%,#150930 100%);position:relative;overflow:hidden}
+.founders::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.025) 1.5px,transparent 1.5px);background-size:34px 34px;pointer-events:none}
+.founders::after{content:'♥';position:absolute;font-size:500px;color:rgba(232,96,154,.04);bottom:-160px;right:-60px;line-height:1;pointer-events:none}
+.founders-inner{position:relative;z-index:2}
+.fhd{text-align:center;margin-bottom:70px}
+.fcards{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:860px;margin:0 auto}
+.fcard{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--r-xl);padding:44px 38px;backdrop-filter:blur(18px);position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s}
+.fcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.fcard-pk::before{background:linear-gradient(90deg,var(--pk),var(--pkl))}
+.fcard-tl::before{background:linear-gradient(90deg,var(--tl),var(--tll))}
+.fcard:hover{transform:translateY(-12px);box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.favatar{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#fff;margin-bottom:20px;position:relative}
+.favatar::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:1.5px solid rgba(255,255,255,.18)}
+.av-pk{background:linear-gradient(135deg,var(--pk),var(--nvm))}.av-tl{background:linear-gradient(135deg,var(--tl),var(--nvm))}
+.fname{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:3px}
+.frole{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--pk);margin-bottom:18px}
+.fdiv{width:36px;height:3px;border-radius:3px;margin-bottom:18px}
+.fdiv-pk{background:linear-gradient(90deg,var(--pk),var(--lm))}.fdiv-tl{background:linear-gradient(90deg,var(--tl),var(--lm))}
+.fnote{font-family:'Cormorant Garamond',serif;font-size:17.5px;color:rgba(255,255,255,.52);line-height:1.85;font-style:italic}
+.fnote::before{content:'"';color:var(--pk);font-size:52px;line-height:0;vertical-align:-.42em;margin-right:4px;font-style:normal}
+
+/* PATHWAY */
+.pathway{background:white;position:relative;overflow:hidden}
+.pathway::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(141,198,63,.1) 1.5px,transparent 1.5px);background-size:44px 44px;pointer-events:none}
+.pathway::after{content:'';position:absolute;right:-120px;top:-80px;width:440px;height:440px;background:radial-gradient(circle,var(--pkp) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.phdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;gap:20px;position:relative;z-index:2;flex-wrap:wrap}
+.ptimeline{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;margin-bottom:64px;position:relative;z-index:2}
+.pstep{padding:44px 38px;background:white;border:2px solid rgba(232,96,154,.1);border-radius:var(--r-xl);position:relative;overflow:hidden;box-shadow:var(--sh-card);transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s}
+.pstep:hover{transform:translateY(-12px);box-shadow:0 36px 72px rgba(232,96,154,.14)}
+.pstep-1{border-top:4px solid var(--pk)}.pstep-2{border-top:4px solid var(--tl)}
+.psn{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;color:rgba(232,96,154,.07);line-height:1;position:absolute;top:12px;right:18px}
+.psico{width:56px;height:56px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;margin-bottom:16px}
+.pi-pk{background:linear-gradient(135deg,var(--pk),var(--nvm))}.pi-tl{background:linear-gradient(135deg,var(--tl),var(--nvm))}
+.pstit{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--nv);margin-bottom:8px}
+.pssub{font-size:14px;color:var(--sub);line-height:1.75;margin-bottom:18px}
+.pchips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:800;padding:5px 14px;border-radius:var(--r-pill)}
+.cp{background:var(--pkp);color:var(--pk2)}.cn{background:var(--nvl);color:var(--nv)}.cl{background:var(--lml);color:var(--lm2)}.ct{background:var(--tll);color:var(--tl2)}
+.parrow{display:flex;align-items:center;justify-content:center}
+.arrowtrack{display:flex;flex-direction:column;align-items:center;gap:10px}
+.atop,.abot{width:2px;height:38px;border-radius:2px}
+.atop{background:linear-gradient(180deg,var(--pk),var(--tl))}.abot{background:linear-gradient(180deg,var(--tl),var(--pk))}
+.amid{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--tl));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:900;box-shadow:0 6px 20px rgba(232,96,154,.28)}
+.mbox{background:linear-gradient(135deg,var(--nv),var(--nv2));border-radius:var(--r-xl);padding:60px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(61,36,132,.2)}
+.mbox::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 100% 0%,rgba(232,96,154,.18) 0%,transparent 60%)}
+.mb-in{position:relative;z-index:2}
+.mb-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-pill);margin-bottom:16px}
+.mb-tit{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:10px}
+.mb-tit em{color:var(--pkl);font-style:italic}
+.mb-body{font-size:15px;color:rgba(255,255,255,.52);line-height:1.75;max-width:460px;margin-bottom:22px}
+.mb-perks{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+.mb-perks li{display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(255,255,255,.68)}
+.mb-perks li::before{content:'✓';min-width:22px;height:22px;background:rgba(141,198,63,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--lm)}
+.mb-acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn-wh{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--nv);padding:13px 28px;border-radius:var(--r-pill);font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 10px 36px rgba(0,0,0,.16);transition:transform .22s;font-family:'Nunito',sans-serif}
+.btn-wh:hover{transform:translateY(-2px)}
+.mb-vis{position:relative;z-index:2;width:240px;flex-shrink:0}
+.mcrd{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:var(--r-xl);padding:28px 22px;backdrop-filter:blur(14px);text-align:center;animation:bfloat 4s ease-in-out infinite}
+.mc-circle{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--nvm));margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:#fff;box-shadow:0 10px 28px rgba(232,96,154,.38)}
+.mc-nm{font-size:17px;font-weight:800;color:#fff;margin-bottom:4px}
+.mc-rl{font-size:12.5px;color:rgba(255,255,255,.44)}
+
+/* VIDEO */
+.video-section{background:linear-gradient(160deg,var(--nvl) 0%,var(--pkp) 50%,var(--lml) 100%);position:relative;overflow:hidden;text-align:center}
+.video-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(61,36,132,.07) 1.5px,transparent 1.5px);background-size:30px 30px;pointer-events:none}
+.vs-inner{max-width:920px;margin:0 auto;position:relative;z-index:2}
+.vstit{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.8vw,62px);font-weight:700;color:var(--nv);line-height:1.05}
+.vstit em{color:var(--pk);font-style:italic}
+.vssub{font-size:16px;color:var(--sub);line-height:1.75;margin:14px auto 52px}
+.vmonitor{position:relative;max-width:880px;margin:0 auto}
+.vmonitor-frame{background:#180f2a;border-radius:var(--r-xl) var(--r-xl) 14px 14px;padding:20px 20px 62px;box-shadow:0 60px 140px rgba(45,27,105,.28),0 0 0 10px rgba(255,255,255,.08),inset 0 3px 0 rgba(255,255,255,.12)}
+.vinner{border-radius:var(--r-lg);overflow:hidden;background:var(--nv2)}
+.vinner video{width:100%;display:block;aspect-ratio:16/9}
+.vmonitor::after{content:'';position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:140px;height:8px;background:rgba(255,255,255,.12);border-radius:4px}
+
+/* LOCATIONS */
+.locations{background:var(--of);position:relative;overflow:hidden}
+.locations::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,169,157,.09) 2px,transparent 2px);background-size:44px 44px;pointer-events:none}
+.loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:56px;position:relative;z-index:2}
+.loc-card{background:#fff;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-card);transition:all .45s cubic-bezier(.23,1,.32,1)}
+.loc-card:hover{transform:translateY(-14px) scale(1.012);box-shadow:0 36px 72px rgba(232,96,154,.2)}
+.loc-header{height:148px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
+.lh-pk{background:linear-gradient(135deg,var(--pkl),var(--pkp))}.lh-tl{background:linear-gradient(135deg,var(--tll),var(--nvl))}.lh-lm{background:linear-gradient(135deg,var(--lml),var(--tll))}.lh-am{background:linear-gradient(135deg,var(--aml),var(--lml))}
+.loc-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px}
+.lh-pk::after{background:linear-gradient(90deg,var(--pk),var(--pkl))}.lh-tl::after{background:linear-gradient(90deg,var(--tl),var(--tll))}.lh-lm::after{background:linear-gradient(90deg,var(--lm),var(--lml))}.lh-am::after{background:linear-gradient(90deg,var(--am),var(--aml))}
+.loc-badge{position:absolute;top:12px;right:12px;font-size:10.5px;font-weight:800;padding:4px 12px;border-radius:var(--r-pill);letter-spacing:.06em}
+.lb-act{background:var(--lml);color:var(--lm2)}.lb-new{background:var(--pkp);color:var(--pk2)}
+.loc-city{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--nv);padding:20px 22px 6px}
+.loc-name{font-size:14px;color:var(--sub);padding:0 22px 20px;line-height:1.55}
+.loc-map-link{display:block;margin:0 20px 20px;padding:11px 18px;background:var(--nvl);color:var(--nv);text-align:center;border-radius:var(--r-pill);font-weight:800;font-size:13px;text-decoration:none;transition:all .25s}
+.loc-map-link:hover{background:var(--nv);color:#fff}
+
+/* CONTACT */
+.contact-mini{background:linear-gradient(145deg,var(--pkp),#fff,var(--tll));padding:90px 5vw;position:relative;overflow:hidden}
+.contact-mini::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,96,154,.08) 1.5px,transparent 1.5px);background-size:36px 36px;pointer-events:none}
+.contact-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:center;position:relative;z-index:2}
+.contact-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.8vw,50px);font-weight:700;color:var(--nv);line-height:1.12;margin-bottom:14px}
+.contact-text p{font-size:15.5px;color:var(--sub);max-width:400px;line-height:1.75}
+.contact-card{background:#fff;border-radius:var(--r-xl);padding:42px 38px;box-shadow:var(--sh-pk);border:2px solid rgba(232,96,154,.07)}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-item{display:flex;gap:15px;align-items:flex-start}
+.contact-item .icon{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ci-pk{background:var(--pkp)}.ci-tl{background:var(--tll)}.ci-lm{background:var(--lml)}
+.contact-item p{font-size:14.5px;line-height:1.65;color:var(--bdy)}
+.cta-btn{display:inline-flex;align-items:center;gap:11px;background:var(--pk);color:#fff;padding:16px 36px;border-radius:var(--r-pill);font-weight:800;font-size:15px;margin-top:18px;box-shadow:var(--sh-pk);transition:all .28s;text-decoration:none;font-family:'Nunito',sans-serif}
+.cta-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 50px rgba(232,96,154,.38)}
+
+/* BOARD */
+.board-mini{background:#fff;padding:90px 5vw;position:relative;overflow:hidden}
+.board-mini::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(141,198,63,.08) 1.5px,transparent 1.5px);background-size:44px 44px;pointer-events:none}
+.board-inner{max-width:1060px;margin:0 auto;position:relative;z-index:2}
+.board-header{text-align:center;margin-bottom:56px}
+.board-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.board-card{background:#fff;border-radius:var(--r-xl);padding:30px;text-align:center;box-shadow:var(--sh-card);transition:all .4s cubic-bezier(.23,1,.32,1);border:2px solid transparent}
+.board-card:hover{transform:translateY(-12px) scale(1.013);box-shadow:var(--sh-pk);border-color:var(--pkl)}
+.board-avatar{width:88px;height:88px;margin:0 auto 16px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:700;font-family:'Cormorant Garamond',serif}
+.ba-pk{background:linear-gradient(135deg,var(--pk),var(--nvm))}.ba-tl{background:linear-gradient(135deg,var(--tl),var(--nvm))}.ba-lm{background:linear-gradient(135deg,var(--lm),var(--nvm))}.ba-am{background:linear-gradient(135deg,var(--am),var(--nvm))}
+.board-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--nv)}
+.board-role{font-size:12.5px;font-weight:800;color:var(--pk);margin:4px 0 12px}
+.board-bio{font-size:13.5px;color:var(--sub);line-height:1.6}
+.btn-pks-full{background:linear-gradient(135deg,var(--pk),var(--nvm));color:#fff;padding:14px 34px;border-radius:var(--r-pill);font-weight:800;font-size:14.5px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:transform .22s,box-shadow .22s;font-family:'Nunito',sans-serif}
+.btn-pks-full:hover{transform:translateY(-2px);box-shadow:var(--sh-pk)}
+
+/* JOIN */
+.joinus{background:linear-gradient(145deg,var(--pk) 0%,var(--pk2) 25%,var(--nvm) 65%,var(--nv2) 100%);position:relative;overflow:hidden}
+.joinus::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:26px 26px;pointer-events:none}
+.ji-deco{position:absolute;font-size:64px;opacity:.1;animation:flt 7s ease-in-out infinite;pointer-events:none}
+.jd1{top:12%;left:2%;animation-delay:0s}.jd2{bottom:12%;right:3%;animation-delay:2s}.jd3{top:55%;left:44%;font-size:42px;animation-delay:3.5s}
+.jr-wrap{position:absolute;top:50%;right:6%;transform:translateY(-50%)}
+.jr{border-radius:50%;border:1px solid rgba(255,255,255,.08);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.jr1{width:260px;height:260px}.jr2{width:420px;height:420px;border-color:rgba(255,255,255,.05)}.jr3{width:560px;height:560px;border-color:rgba(255,255,255,.025)}
+.ji-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 280px;align-items:center;gap:72px}
+.ji-tit{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.8vw,60px);font-weight:700;color:#fff;line-height:1.06}
+.ji-tit em{font-style:italic;color:var(--lml)}
+.ji-sub{font-size:16px;color:rgba(255,255,255,.6);margin-top:16px;line-height:1.75;max-width:480px}
+.btn-whl{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--nv);padding:16px 36px;border-radius:var(--r-pill);font-weight:800;font-size:15px;text-decoration:none;margin-top:34px;box-shadow:0 14px 44px rgba(0,0,0,.18);transition:transform .22s,box-shadow .22s;font-family:'Nunito',sans-serif}
+.btn-whl:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 22px 58px rgba(0,0,0,.28)}
+.ji-ph{border-radius:var(--r-xl);overflow:hidden;box-shadow:0 36px 72px rgba(0,0,0,.28)}
+.ji-ph img{width:100%;display:block}
+
+/* FOOTER */
+footer{background:#0e0818;padding:0 5vw 34px}
+.footer-rainbow{height:4px;background:linear-gradient(90deg,var(--pk),var(--am),var(--lm),var(--tl),var(--nvm),var(--pk))}
+.ftop{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:52px;padding:60px 0 52px}
+.fbnm{font-family:'Nunito',sans-serif;font-size:20px;color:#fff;font-weight:900;display:block;margin-bottom:13px}
+.fbnm span{color:var(--pk)}
+.fbp{font-size:13.5px;line-height:1.8;max-width:240px;color:rgba(255,255,255,.38);margin-bottom:20px}
+.fsocs{display:flex;gap:9px}
+.fsoc{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:all .2s}
+.fsoc:hover{background:var(--pk);border-color:var(--pk);color:#fff;transform:translateY(-2px)}
+.fc h4{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#fff;margin-bottom:16px}
+.fc a{display:block;font-size:13.5px;color:rgba(255,255,255,.36);text-decoration:none;margin-bottom:9px;transition:color .2s}
+.fc a:hover{color:var(--pk)}
+.fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:rgba(255,255,255,.32)}
+.fdlks{display:flex;gap:18px}
+.fdlks a{color:rgba(255,255,255,.26);text-decoration:none;font-size:12.5px;transition:color .2s}
+.fdlks a:hover{color:var(--pk)}
+
+.btt{position:fixed;bottom:26px;right:26px;z-index:999;width:46px;height:46px;background:linear-gradient(135deg,var(--pk),var(--nvm));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;font-weight:900;box-shadow:var(--sh-pk);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.btt.show{opacity:1;pointer-events:all}
+.btt:hover{transform:translateY(-3px) scale(1.08)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .about-grid,.contact-inner{grid-template-columns:1fr}
+  .doctor-stage{height:480px;margin-bottom:32px}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .fcards{grid-template-columns:1fr}
+  .ptimeline{grid-template-columns:1fr;gap:20px}
+  .parrow{display:none}
+  .mbox{grid-template-columns:1fr;padding:44px}
+  .mb-vis{display:none}
+  .ji-inner{grid-template-columns:1fr}
+  .ji-ph{display:none}
+  .jr-wrap{display:none}
+  .ftop{grid-template-columns:1fr 1fr;gap:32px}
+  .phdr{flex-direction:column;align-items:flex-start}
+  .bubble{display:none}
+}
+@media(max-width:640px){
+  .hero-title{font-size:clamp(44px,12vw,72px)}
+  .hero-stats{gap:24px}
+  .hero-acts{flex-direction:column;align-items:center}
+  .srv-grid{grid-template-columns:1fr}
+  .board-grid{grid-template-columns:1fr 1fr}
+  section{padding:72px 5vw}
+  .doctor-stage{height:380px}
+  .doc-wrap{width:180px;height:290px;bottom:52px}
+  .ftop{grid-template-columns:1fr}
+  .mbox{padding:32px 24px}
+  .aacts,.mb-acts{flex-direction:column}
+  .aacts a,.mb-acts a,.hero-acts a{text-align:center;justify-content:center}
+}
+@media(max-width:400px){
+  .board-grid{grid-template-columns:1fr}
+  .fcards{gap:20px}
+}
+</style>
 </head>
-<body class="gradient-background min-h-screen overflow-hidden">
-  <!-- Floating Hearts -->
-  <div class="heart-float" style="left: 10%">❤️</div>
-  <div class="heart-float" style="left: 30%; animation-delay: -2s">💖</div>
-  <div class="heart-float" style="left: 50%; animation-delay: -4s">💕</div>
-  <div class="heart-float" style="left: 70%; animation-delay: -1s">💝</div>
-  <div class="heart-float" style="left: 90%; animation-delay: -3s">💘</div>
+<body>
+<div id="pb"></div>
 
-  <div class="flex items-center justify-center min-h-screen fade-in">
-    <div class="flex flex-col items-center p-8 bg-white/30 backdrop-blur-sm heart-border rounded-2xl mx-4">
-      <img id="imageDisplay" src="./images/image1.gif" alt="Our Love" 
-           class="rounded-lg h-[300px] w-[300px] object-cover pulse shadow-xl" />
-      
-      <h2 id="valentineQuestion" class="romantic-text text-5xl font-bold text-[#ff4d6d] my-6 mt-8">
-        My Dearest Love, Will You Be My Forever Valentine? 🌹
-      </h2>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="Logo.png" alt="ChildLife"/>
+    <span class="nav-brand">Child<span>life</span> &amp; Beyond</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#founders">Founders</a></li>
+    <li><a href="#pathway">Pathway</a></li>
+    <li><a href="#video">Our Story</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="Login" class="nav-cta">Login →</a>
+  <button class="hamburger" id="ham" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="#home">Home</a><a href="#services">Services</a><a href="#about">About</a>
+  <a href="#founders">Founders</a><a href="#pathway">Pathway</a><a href="#video">Our Story</a>
+  <a href="#locations">Locations</a><a href="#contact">Contact</a>
+  <a href="Login" class="nav-cta">Login →</a>
+</div>
 
-      <div class="flex gap-6 pt-6 items-center" id="responseButtons">
-        <button id="yesButton"
-          class="romantic-text bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-full
-                 text-3xl hover:scale-105 transition-transform duration-300 disabled:pointer-events-none 
-                 disabled:opacity-50 hover:bg-[#ff4d6d] h-16 min-w-[120px] px-8 py-4 bg-[#ff758f] 
-                 text-white shadow-lg hover:shadow-xl gap-2">
-          Yes 💖
-        </button>
-        <button id="noButton"
-          class="romantic-text inline-flex items-center justify-center whitespace-nowrap rounded-full
-                 text-2xl transition-all duration-300 disabled:pointer-events-none hover:scale-95 
-                 disabled:opacity-50 h-12 min-w-[100px] px-6 py-3 bg-white/30 text-[#ff4d6d] 
-                 border-2 border-[#ff4d6d] hover:bg-white/50 hover:shadow-lg">
-          No 😢
-        </button>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hblob hb1"></div><div class="hblob hb2"></div><div class="hblob hb3"></div><div class="hblob hb4"></div>
+  <div class="hdeco hd1">🧸</div><div class="hdeco hd2">🎈</div><div class="hdeco hd3">🩺</div>
+  <div class="hdeco hd4">🎨</div><div class="hdeco hd5">🧩</div><div class="hdeco hd6">⭐</div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="bdot"></span>India's First Child Life Program</div>
+    <h1 class="hero-title">Where <em>Play</em><br/>Meets <span class="lm-em">Healing</span></h1>
+    <p class="hero-sub">Equipping healthcare professionals to transform the hospital experience for children and families — through certified child life specialist training.</p>
+    <div class="hero-acts">
+      <a href="#pathway" class="btn-pk">Explore the Program →</a>
+      <a href="Register" class="btn-out">Apply Now ✦</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-n"><span id="enrolled">0</span><span>+</span></div><div class="stat-l">Students Enrolled</div></div>
+      <div><div class="stat-n">1<span style="color:var(--lm)">st</span></div><div class="stat-l">Program in India</div></div>
+      <div><div class="stat-n" style="color:var(--tl)">∞</div><div class="stat-l">Lives Changed</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rainbow"></div>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-inner">
+    <span class="mq-item">Child Life Specialist</span><span class="mq-item">Psychosocial Support</span><span class="mq-item">Pediatric Healthcare</span><span class="mq-item">Family-Centred Care</span><span class="mq-item">Play Therapy</span><span class="mq-item">Manipal Hospitals</span><span class="mq-item">Clinical Internship</span><span class="mq-item">Global Certificate</span><span class="mq-item">Child Life Specialist</span><span class="mq-item">Psychosocial Support</span><span class="mq-item">Pediatric Healthcare</span><span class="mq-item">Family-Centred Care</span><span class="mq-item">Play Therapy</span><span class="mq-item">Manipal Hospitals</span><span class="mq-item">Clinical Internship</span><span class="mq-item">Global Certificate</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="reveal" style="position:relative;z-index:2">
+    <div class="stag">What We Offer</div>
+    <h2 class="stit">Our <em>Services</em></h2>
+    <p class="ssub">Comprehensive child life and psychosocial programs designed to support children, families, communities, and healthcare professionals.</p>
+  </div>
+  <div class="srv-grid">
+    <div class="srv-card sc1 reveal-l">
+      <div class="srv-ico">🏥</div>
+      <h3 class="srv-n">Child Life Internship &amp; Training</h3>
+      <p class="srv-d">India's first certified child life internship — a full-year, hands-on clinical placement within Manipal Hospitals, leading to internationally recognised certification.</p>
+    </div>
+    <div class="srv-card sc2 reveal">
+      <div class="srv-ico">💚</div>
+      <h3 class="srv-n">Hospital Staff Wellness Workshop</h3>
+      <p class="srv-d">Structured wellness and resilience programs for hospital staff — addressing burnout, compassion fatigue, and nurturing a healthier care environment.</p>
+    </div>
+    <div class="srv-card sc3 reveal-r">
+      <div class="srv-ico">🌍</div>
+      <h3 class="srv-n">Community Outreach Program</h3>
+      <p class="srv-d">Taking child life services beyond hospital walls — into schools, communities, and underserved areas to promote child wellbeing and psychosocial health.</p>
+    </div>
+    <div class="srv-card sc4 reveal-l">
+      <div class="srv-ico">🧠</div>
+      <h3 class="srv-n">Support &amp; Community for Psychologists</h3>
+      <p class="srv-d">A dedicated peer network, mentorship, and CPD resources for psychologists working in pediatric and hospital settings across India.</p>
+    </div>
+    <div class="srv-card sc5 reveal">
+      <div class="srv-ico">🔬</div>
+      <h3 class="srv-n">Completed, Ongoing &amp; Future Research</h3>
+      <p class="srv-d">Contributing to the evidence base for child life practice in India — from completed clinical studies to ongoing research and future collaborations.</p>
+    </div>
+    <div class="srv-card sc6 reveal-r">
+      <div class="srv-ico">🤝</div>
+      <h3 class="srv-n">Counselling &amp; Psychological Support</h3>
+      <p class="srv-d">Providing accessible counselling and psychological support across populations — children, families, caregivers, and healthcare teams across the lifespan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + INTERACTIVE DOCTOR -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal-l">
+      <div class="doctor-stage" id="doctorStage">
+        <div class="stage-bg" id="stageBg"></div>
+        <div class="stage-floor"></div>
+        <div class="sfloat sf1">🧸</div>
+        <div class="sfloat sf2">⭐</div>
+        <div class="sfloat sf3">🎨</div>
+        <div class="doc-wrap" id="docWrap">
+          <svg class="doc-svg" viewBox="0 0 240 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sG" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#FFE0C4"/><stop offset="100%" stop-color="#FFBF8A"/></radialGradient>
+              <radialGradient id="sG2" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#FFD4B0"/><stop offset="100%" stop-color="#FFAF78"/></radialGradient>
+              <linearGradient id="scG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00BFB3"/><stop offset="100%" stop-color="#007F76"/></linearGradient>
+              <linearGradient id="drG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8609A"/><stop offset="100%" stop-color="#C93F7A"/></linearGradient>
+              <linearGradient id="bdG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F9D4E6"/><stop offset="100%" stop-color="#FEF0F7"/></linearGradient>
+              <filter id="ss"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="rgba(61,36,132,.14)"/></filter>
+            </defs>
+            <!-- BED -->
+            <rect x="14" y="280" width="212" height="18" rx="9" fill="#E8609A" opacity=".22"/>
+            <rect x="8" y="295" width="224" height="10" rx="5" fill="#E8609A" opacity=".13"/>
+            <rect x="130" y="263" width="72" height="21" rx="10" fill="url(#bdG)" stroke="#E8609A" stroke-width="1.5"/>
+            <rect x="20" y="305" width="10" height="22" rx="3" fill="#C8B8E8" opacity=".5"/>
+            <rect x="210" y="305" width="10" height="22" rx="3" fill="#C8B8E8" opacity=".5"/>
+            <!-- CHILD -->
+            <rect x="131" y="222" width="44" height="48" rx="16" fill="url(#drG)" filter="url(#ss)"/>
+            <path d="M140 268 Q137 290 135 308" stroke="url(#sG)" stroke-width="11" stroke-linecap="round"/>
+            <path d="M165 268 Q168 290 170 308" stroke="url(#sG)" stroke-width="11" stroke-linecap="round"/>
+            <ellipse cx="133" cy="312" rx="9" ry="5" fill="#8DC63F" opacity=".85"/>
+            <ellipse cx="172" cy="312" rx="9" ry="5" fill="#8DC63F" opacity=".85"/>
+            <path d="M131 234 Q112 244 110 260" stroke="url(#sG)" stroke-width="10" stroke-linecap="round"/>
+            <path d="M175 234 Q194 244 196 260" stroke="url(#sG)" stroke-width="10" stroke-linecap="round"/>
+            <rect x="147" y="208" width="18" height="16" rx="6" fill="url(#sG)"/>
+            <circle cx="156" cy="194" r="30" fill="url(#sG)" filter="url(#ss)"/>
+            <ellipse cx="156" cy="168" rx="30" ry="14" fill="#3D2484" opacity=".62"/>
+            <ellipse cx="138" cy="180" rx="8" ry="13" fill="#3D2484" opacity=".52"/>
+            <ellipse cx="174" cy="180" rx="8" ry="13" fill="#3D2484" opacity=".52"/>
+            <circle cx="146" cy="194" r="4.5" fill="white"/><circle cx="166" cy="194" r="4.5" fill="white"/>
+            <circle cx="147" cy="194" r="2.5" fill="#2B1860"/><circle cx="167" cy="194" r="2.5" fill="#2B1860"/>
+            <circle cx="148.5" cy="192.5" r="1" fill="white"/><circle cx="168.5" cy="192.5" r="1" fill="white"/>
+            <path d="M144 202 Q156 214 168 202" stroke="#C93F7A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="138" cy="200" r="7" fill="#E8609A" opacity=".18"/>
+            <circle cx="174" cy="200" r="7" fill="#E8609A" opacity=".18"/>
+            <path d="M196 260 Q210 228 200 190 Q192 156 196 128" stroke="#8DC63F" stroke-width="1.8" fill="none" stroke-dasharray="5,4"/>
+            <ellipse cx="196" cy="110" rx="24" ry="30" fill="#8DC63F" opacity=".88" filter="url(#ss)"/>
+            <ellipse cx="190" cy="98" rx="6" ry="9" fill="white" opacity=".32"/>
+            <path d="M191 140 Q196 148 201 140" stroke="#6FA52E" stroke-width="1.5" fill="none"/>
+            <rect x="112" y="262" width="20" height="20" rx="4" fill="#FFB347" opacity=".9"/>
+            <text x="122" y="278" font-size="11" text-anchor="middle" fill="white" font-weight="bold" font-family="Nunito,sans-serif">A</text>
+            <!-- SPECIALIST -->
+            <path d="M72 268 L68 328" stroke="#2B1860" stroke-width="13" stroke-linecap="round" opacity=".5"/>
+            <path d="M96 268 L100 328" stroke="#2B1860" stroke-width="13" stroke-linecap="round" opacity=".5"/>
+            <ellipse cx="67" cy="332" rx="11" ry="6" fill="#3D2484" opacity=".65"/>
+            <ellipse cx="101" cy="332" rx="11" ry="6" fill="#3D2484" opacity=".65"/>
+            <rect x="58" y="188" width="68" height="86" rx="22" fill="url(#scG)" filter="url(#ss)"/>
+            <rect x="79" y="200" width="26" height="8" rx="3" fill="white" opacity=".48"/>
+            <rect x="87" y="196" width="10" height="16" rx="3" fill="white" opacity=".48"/>
+            <path d="M62 210 Q50 230 52 255 Q54 275 62 280" stroke="#FFB347" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="62" cy="283" r="7" fill="#FFB347" opacity=".9"/>
+            <path d="M58 210 Q38 232 32 260" stroke="url(#sG2)" stroke-width="14" stroke-linecap="round"/>
+            <path d="M126 210 Q146 232 150 255" stroke="url(#sG2)" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="32" cy="264" r="10" fill="url(#sG2)"/>
+            <rect x="140" y="250" width="28" height="36" rx="5" fill="white" stroke="#E8609A" stroke-width="2"/>
+            <rect x="148" y="246" width="12" height="8" rx="3" fill="#E8609A"/>
+            <rect x="144" y="263" width="20" height="2" rx="1" fill="#C8B8E8"/>
+            <rect x="144" y="270" width="16" height="2" rx="1" fill="#C8B8E8"/>
+            <rect x="144" y="277" width="18" height="2" rx="1" fill="#C8B8E8"/>
+            <rect x="76" y="172" width="32" height="18" rx="8" fill="url(#sG2)"/>
+            <circle cx="92" cy="152" r="34" fill="url(#sG2)" filter="url(#ss)"/>
+            <ellipse cx="92" cy="122" rx="34" ry="16" fill="#6B3A2A" opacity=".72"/>
+            <circle cx="92" cy="110" r="14" fill="#6B3A2A" opacity=".68"/>
+            <circle cx="60" cy="155" r="4" fill="#E8609A" opacity=".8"/>
+            <circle cx="124" cy="155" r="4" fill="#E8609A" opacity=".8"/>
+            <circle cx="80" cy="152" r="5.5" fill="white"/><circle cx="104" cy="152" r="5.5" fill="white"/>
+            <circle cx="81" cy="152" r="3" fill="#2B1860"/><circle cx="105" cy="152" r="3" fill="#2B1860"/>
+            <circle cx="82" cy="150.5" r="1.2" fill="white"/><circle cx="106" cy="150.5" r="1.2" fill="white"/>
+            <path d="M78 162 Q92 175 106 162" stroke="#C93F7A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <circle cx="70" cy="160" r="9" fill="#E8609A" opacity=".14"/>
+            <circle cx="114" cy="160" r="9" fill="#E8609A" opacity=".14"/>
+            <path d="M60 132 Q92 118 124 132" stroke="#E8609A" stroke-width="5" fill="none" stroke-linecap="round" opacity=".68"/>
+            <text x="92" y="128" font-size="10" text-anchor="middle" fill="#E8609A" font-family="sans-serif">♥</text>
+            <!-- Sparkles -->
+            <text x="18" y="155" font-size="16" fill="#FFB347" opacity=".65" font-family="sans-serif">✦</text>
+            <text x="208" y="172" font-size="12" fill="#8DC63F" opacity=".65" font-family="sans-serif">★</text>
+            <text x="214" y="238" font-size="10" fill="#00A99D" opacity=".55" font-family="sans-serif">◆</text>
+          </svg>
+          <div class="bubble b1">❤️ Holistic Care</div>
+          <div class="bubble b2">🎓 Certified Specialist</div>
+          <div class="bubble b3">🧸 Play Therapy</div>
+          <div class="bubble b4">🌱 Family Support</div>
+        </div>
+        <div class="stage-rainbow"></div>
+        <div class="stage-tip">✦ Move your cursor to interact</div>
+      </div>
+    </div>
+    <div class="about-text reveal-r">
+      <div class="stag">About Us</div>
+      <h2 class="stit">Child Life <em>Services</em></h2>
+      <p class="ssub">Child Life Services support the emotional and developmental needs of children and families during hospitalisation — through play, preparation, and counselling.</p>
+      <ul class="alist">
+        <li><span class="lico" style="background:var(--pkp)">🤝</span>Family-centred care that keeps parents at the heart of every interaction</li>
+        <li><span class="lico" style="background:var(--lml)">🎮</span>Evidence-based play therapy to reduce fear, pain, and anxiety in children</li>
+        <li><span class="lico" style="background:var(--tll)">📜</span>Internationally recognised certification upon program completion</li>
+        <li><span class="lico" style="background:var(--nvl)">🌍</span>Pioneering India's growing pediatric psychosocial care movement</li>
+      </ul>
+      <div class="aacts">
+        <a href="about" class="btn-pks">Read More →</a>
+        <a href="#" class="btn-outs">Download Brochure ↓</a>
       </div>
     </div>
   </div>
+</section>
 
-  <script type="module">
-    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
-    
-    const imagePaths = [
-      './images/image1.gif',
-      './images/image2.gif',
-      './images/image3.gif',
-      './images/image4.gif',
-      './images/image5.gif',
-      './images/image6.gif'
-    ];
-    
-    let noClickCount = 0;
-    let isRunningAway = false;
-    const escapeSpeed = 3;
-    const responseMessages = [
-      "No 😢", "Really? 💔", "My heart aches...", 
-      "I'll love you more! 💘", "Can't live without you", 
-      "You're my soulmate 🌹"
-    ];
-  
-    // No button movement handler
-    function moveButtonAway(e) {
-      if (!isRunningAway) return;
-      
-      const noButton = document.getElementById('noButton');
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      const buttonRect = noButton.getBoundingClientRect();
-      const buttonX = buttonRect.left + buttonRect.width/2;
-      const buttonY = buttonRect.top + buttonRect.height/2;
-      
-      // Calculate distance between cursor and button
-      const deltaX = mouseX - buttonX;
-      const deltaY = mouseY - buttonY;
-      const distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-      
-      // If cursor is close, move button away
-      if (distance < 150) {
-        const angle = Math.atan2(deltaY, deltaX);
-        const newX = buttonRect.left - Math.cos(angle) * escapeSpeed;
-        const newY = buttonRect.top - Math.sin(angle) * escapeSpeed;
-        
-        // Keep button within viewport
-        const boundedX = Math.max(0, Math.min(window.innerWidth - buttonRect.width, newX));
-        const boundedY = Math.max(0, Math.min(window.innerHeight - buttonRect.height, newY));
-        
-        noButton.style.position = 'fixed';
-        noButton.style.left = `${boundedX}px`;
-        noButton.style.top = `${boundedY}px`;
-      }
-    }
-  
-    yesButton.addEventListener('click', () => {
-      // Confetti explosion
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+<!-- FOUNDERS -->
+<section class="founders" id="founders">
+  <div class="founders-inner">
+    <div class="fhd reveal">
+      <div class="stag" style="justify-content:center;color:rgba(255,255,255,.5)"><span style="background:rgba(255,255,255,.18);width:22px;height:3px;border-radius:3px;display:inline-block"></span>Our Founders</div>
+      <h2 class="stit" style="color:#fff;text-align:center">The Visionaries Behind <em style="color:var(--pk)">ChildLife India</em></h2>
+      <p class="ssub" style="color:rgba(255,255,255,.44);text-align:center;margin:14px auto 0">Two doctors, one shared dream — bringing world-class child life care to every hospital in India.</p>
+    </div>
+    <div class="fcards">
+      <div class="fcard fcard-pk reveal-l"><div class="favatar av-pk">DC</div><div class="fname">Dr. Chethan</div><div class="frole">Co-Founder &amp; Director</div><div class="fdiv fdiv-pk"></div><p class="fnote">Every child deserves to feel safe, heard, and supported — not just medically treated. ChildLife is our promise that healing is about the whole child.</p></div>
+      <div class="fcard fcard-tl reveal-r"><div class="favatar av-tl">SS</div><div class="fname">Dr. Shushma</div><div class="frole">Co-Founder &amp; Program Lead</div><div class="fdiv fdiv-tl"></div><p class="fnote">When a child plays freely in a hospital corridor, we have done our job. Our mission is to make that a reality for every family across India.</p></div>
+    </div>
+  </div>
+</section>
 
-      // Update text and image
-      valentineQuestion.textContent = "Yay! You made me the happiest! 💖";
-      imageDisplay.src = imagePaths[imagePaths.length - 1];
-      imageDisplay.classList.add('bounce');
+<!-- PATHWAY -->
+<section class="pathway" id="pathway">
+  <div class="phdr reveal">
+    <div><div class="stag">Your Journey</div><h2 class="stit">The ChildLife <em>Pathway</em></h2><p class="ssub">From clinical training to professional certification — a clear, purposeful journey.</p></div>
+    <a href="Courses" class="btn-outs">View All Programs →</a>
+  </div>
+  <div class="ptimeline">
+    <div class="pstep pstep-1 reveal-l">
+      <span class="psn">01</span><div class="psico pi-pk">🏥</div>
+      <h3 class="pstit">Clinical Internship</h3>
+      <p class="pssub">A full-year, hands-on internship embedded within Manipal Hospitals. Work directly with children and families, supervised by certified child life specialists.</p>
+      <div class="pchips"><span class="chip cp">1 Year</span><span class="chip cn">Manipal Hospitals</span><span class="chip cl">30 Students/yr</span></div>
+      <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap"><a href="CourseDetails" class="btn-pks" style="font-size:13px;padding:10px 20px">Read More</a><a href="Register" class="btn-outs" style="font-size:13px;padding:9px 18px">Apply →</a></div>
+      <div style="display:flex;gap:22px;margin-top:26px;padding-top:20px;border-top:1.5px solid rgba(232,96,154,.1)">
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--pk);line-height:1">30+</div><div style="font-size:11px;color:var(--sub);margin-top:2px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Students</div></div>
+        <div><div style="font-size:18px;color:var(--lm);line-height:1.5">★★★★★</div><div style="font-size:11px;color:var(--sub);margin-top:2px;text-transform:uppercase;letter-spacing:.06em;font-weight:700">Top Rated</div></div>
+      </div>
+    </div>
+    <div class="parrow"><div class="arrowtrack"><div class="atop"></div><div class="amid">+</div><div class="abot"></div></div></div>
+    <div class="pstep pstep-2 reveal-r">
+      <span class="psn" style="color:rgba(0,169,157,.07)">02</span><div class="psico pi-tl">🏅</div>
+      <h3 class="pstit">Child Life Body Membership</h3>
+      <p class="pssub">Graduates receive their internationally recognised certificate and can apply for full Child Life Body membership — unlocking a global professional community.</p>
+      <div class="pchips"><span class="chip ct">Post-Internship</span><span class="chip cn">International</span><span class="chip cl">Lifelong Access</span></div>
+      <div style="margin-top:22px;padding:16px;background:var(--nvl);border-radius:var(--r-lg);border:1.5px solid rgba(61,36,132,.1)">
+        <p style="font-size:13px;color:var(--nv);font-weight:800;margin-bottom:5px">🔑 Already completed your internship?</p>
+        <p style="font-size:13px;color:var(--sub);line-height:1.65;margin-bottom:11px">Log in to apply for your Child Life Body Membership directly.</p>
+        <a href="Login" class="btn-pks" style="font-size:13px;padding:9px 18px;display:inline-flex">Login to Apply →</a>
+      </div>
+    </div>
+  </div>
+  <div class="mbox reveal">
+    <div class="mb-in">
+      <div class="mb-badge">🏅 Child Life Body Membership</div>
+      <h3 class="mb-tit">Join the <em>Professional Body</em></h3>
+      <p class="mb-body">Available exclusively to graduates of the ChildLife Internship program. Your internship certificate is the key to a global community of child life professionals.</p>
+      <ul class="mb-perks"><li>Internationally recognised membership certificate</li><li>Access to exclusive CPD resources and workshops</li><li>Global network of child life specialists</li><li>Priority placement for advanced programs</li><li>Digital credential badge for your professional profile</li></ul>
+      <div class="mb-acts">
+        <a href="Login" class="btn-wh">Login to Join →</a>
+        <a href="Register" style="color:rgba(255,255,255,.82);border:2px solid rgba(255,255,255,.2);padding:12px 24px;border-radius:var(--r-pill);font-weight:800;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s;font-family:'Nunito',sans-serif" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">New Registration</a>
+      </div>
+    </div>
+    <div class="mb-vis"><div class="mcrd"><div class="mc-circle">CL</div><div class="mc-nm">Child Life Specialist Member</div><div class="mc-rl">✓ Certified Member</div><div style="margin-top:14px;background:linear-gradient(135deg,var(--pk),var(--nvm));color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:var(--r-pill);display:inline-block">✓ Globally Recognised</div></div></div>
+  </div>
+</section>
 
-      // Hide buttons
-      responseButtons.style.display = 'none';
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="vs-inner">
+    <div class="reveal"><div class="stag" style="justify-content:center">Our Story</div><h2 class="vstit">See <em>ChildLife</em> in Action</h2><p class="vssub">Watch how our program transforms the lives of children and families inside India's leading hospitals — one interaction at a time.</p></div>
+    <div class="vmonitor reveal-s"><div class="vmonitor-frame"><div class="vinner"><video autoplay loop muted playsinline><source src="childlife.mp4" type="video/mp4"/></video></div></div></div>
+  </div>
+</section>
 
-      // Add floating hearts
-      for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.textContent = '💖';
-        heart.classList.add('heart-float');
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.animationDelay = `-${Math.random() * 6}s`;
-        document.body.appendChild(heart);
-      }
-    });
-  
-    noButton.addEventListener('click', function() {
-      if (noClickCount >= responseMessages.length - 1) {
-        isRunningAway = true;
-        document.addEventListener('mousemove', moveButtonAway);
-        noButton.style.transition = 'all 0.3s';
-        return;
-      }
-      
-      // Update button text and image
-      noButton.textContent = responseMessages[noClickCount];
-      imageDisplay.src = imagePaths[noClickCount + 1];
-      imageDisplay.classList.add('shake');
-      
-      // Scale buttons
-      yesButton.style.transform = `scale(${1 + noClickCount*0.3})`;
-      noButton.style.transform = `scale(${1 - noClickCount*0.15})`;
-      
-      // Add hearts to Yes button
-      yesButton.innerHTML = `Yes ${'💖'.repeat(noClickCount + 1)}`;
-      
-      noClickCount++;
-      
-      // Enable fleeing mode after last message
-      if (noClickCount === responseMessages.length - 1) {
-        noButton.textContent = "Try to catch me! 😉";
-        noButton.style.position = 'fixed';
-        noButton.style.cursor = 'pointer';
-        noButton.style.transition = 'left 0.3s, top 0.3s';
-      }
-    });
-  
-    // Keep button within screen bounds
-    function keepInBounds(element) {
-      const rect = element.getBoundingClientRect();
-      if (rect.left < 0) element.style.left = '0';
-      if (rect.top < 0) element.style.top = '0';
-      if (rect.right > window.innerWidth) element.style.left = window.innerWidth - rect.width + 'px';
-      if (rect.bottom > window.innerHeight) element.style.top = window.innerHeight - rect.height + 'px';
-    }
-  </script>
-     
+<!-- LOCATIONS -->
+<section class="locations" id="locations">
+  <div class="reveal" style="position:relative;z-index:2"><div class="stag">Where We Serve</div><h2 class="stit">ChildLife at <em>Manipal Hospitals</em></h2><p class="ssub">Integrated across India's premier healthcare network — bringing play, preparation, and emotional support to children and families.</p></div>
+  <div class="loc-grid">
+    <div class="loc-card reveal-l"><div class="loc-header lh-pk">🏥<div class="loc-badge lb-act">Child Life Active</div></div><div class="loc-city">Bengaluru</div><div class="loc-name">Manipal Hospital Old Airport Road<br/><strong>Flagship Campus</strong></div><a href="https://maps.google.com" target="_blank" class="loc-map-link">📍 Open in Google Maps</a></div>
+    <div class="loc-card reveal"><div class="loc-header lh-tl">🏥<div class="loc-badge lb-act">Child Life Active</div></div><div class="loc-city">Bengaluru</div><div class="loc-name">Manipal Hospital Whitefield<br/><strong>ITPL Campus</strong></div><a href="https://maps.google.com" target="_blank" class="loc-map-link">📍 Open in Google Maps</a></div>
+    <div class="loc-card reveal"><div class="loc-header lh-lm">🏥<div class="loc-badge lb-new">Recently Launched</div></div><div class="loc-city">Bengaluru</div><div class="loc-name">Manipal Hospital Yelahanka<br/><strong>Newest Child Life Hub</strong></div><a href="https://maps.google.com" target="_blank" class="loc-map-link">📍 Open in Google Maps</a></div>
+    <div class="loc-card reveal-r"><div class="loc-header lh-am">🏥<div class="loc-badge lb-act">Child Life Active</div></div><div class="loc-city">Mangaluru</div><div class="loc-name">KMC Hospital Mangaluru<br/><strong>Teaching Campus</strong></div><a href="https://maps.google.com" target="_blank" class="loc-map-link">📍 Open in Google Maps</a></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-mini" id="contact">
+  <div class="contact-inner reveal">
+    <div class="contact-text"><div class="stag">Let's Connect</div><h2>Ready to start your ChildLife journey?</h2><p>Our team is here to answer every question about the internship, certification, or how you can bring Child Life services to your hospital.</p><a href="contact.html" class="cta-btn">Go to Full Contact Page <span style="font-size:18px">→</span></a></div>
+    <div class="contact-card reveal-r"><div class="contact-info">
+      <div class="contact-item"><div class="icon ci-pk">📧</div><div><p><strong>info@childlifeindia.org</strong><br/>General inquiries &amp; applications</p></div></div>
+      <div class="contact-item"><div class="icon ci-tl">📞</div><div><p><strong>+91 80 1234 5678</strong><br/>Mon–Fri, 9 AM – 6 PM</p></div></div>
+      <div class="contact-item"><div class="icon ci-lm">🏥</div><div><p><strong>Manipal Hospitals, Bengaluru</strong><br/>Visit our flagship campus</p></div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- BOARD -->
+<section class="board-mini">
+  <div class="board-inner">
+    <div class="board-header reveal"><div class="stag" style="justify-content:center">Our Leadership</div><h2 class="stit">ChildLife <em>Board Members</em></h2><p class="ssub" style="margin:0 auto;text-align:center">Visionary doctors, pediatric experts, and child psychologists shaping pediatric psychosocial care in India.</p></div>
+    <div class="board-grid">
+      <div class="board-card reveal-l"><div class="board-avatar ba-pk">DC</div><div class="board-name">Dr. Chethan</div><div class="board-role">Co-Founder &amp; Director</div><p class="board-bio">Pioneering holistic child care in Indian hospitals.</p></div>
+      <div class="board-card reveal"><div class="board-avatar ba-tl">SS</div><div class="board-name">Dr. Shushma</div><div class="board-role" style="color:var(--tl)">Co-Founder &amp; Program Lead</div><p class="board-bio">Making play therapy a standard in every pediatric ward.</p></div>
+      <div class="board-card reveal"><div class="board-avatar ba-lm">PS</div><div class="board-name">Dr. Priya Sharma</div><div class="board-role" style="color:var(--lm2)">Pediatric Psychologist</div><p class="board-bio">Leading research on emotional resilience in hospitalised children.</p></div>
+      <div class="board-card reveal-r"><div class="board-avatar ba-am">RK</div><div class="board-name">Dr. Rakesh Kumar</div><div class="board-role" style="color:var(--am)">Child Life Advisor</div><p class="board-bio">International certification trainer &amp; hospital integration expert.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:52px"><a href="boardMembers.html" class="btn-pks-full">Meet the Full Board →</a></div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="joinus" id="joinus">
+  <div class="ji-deco jd1">👧</div><div class="ji-deco jd2">👦</div><div class="ji-deco jd3">🎈</div>
+  <div class="jr-wrap"><div class="jr jr1"></div><div class="jr jr2"></div><div class="jr jr3"></div></div>
+  <div class="ji-inner">
+    <div class="reveal-l">
+      <h2 class="ji-tit">Ready to Make a <em>Difference</em> in a Child's Life?</h2>
+      <p class="ji-sub">Join India's most innovative child life training program. Applications are open for the next cohort — limited seats available.</p>
+      <a href="Register" class="btn-whl">Apply for the Internship →</a>
+    </div>
+    <div class="reveal-r"><div class="ji-ph"><img src="images/JoinUs2.jpg" alt="Join ChildLife" onerror="this.parentElement.innerHTML='<div style=\'padding:56px 36px;background:rgba(255,255,255,.1);border-radius:28px;text-align:center;border:2px solid rgba(255,255,255,.15)\'><div style=\'font-size:72px;margin-bottom:10px\'>👩‍⚕️</div><div style=\'font-size:56px\'>🧸</div></div>'"/></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-rainbow"></div>
+  <div class="ftop">
+    <div><span class="fbnm">Child<span>Life</span></span><p class="fbp">Where Play Meets Healing. India's premier child life specialist training program, powered by Manipal Hospitals.</p><div class="fsocs"><a href="https://twitter.com" target="_blank" class="fsoc">𝕏</a><a href="https://facebook.com" target="_blank" class="fsoc">f</a><a href="https://youtube.com" target="_blank" class="fsoc">▶</a><a href="https://linkedin.com" target="_blank" class="fsoc">in</a></div></div>
+    <div class="fc"><h4>Program</h4><a href="#">Internship</a><a href="#">Membership</a><a href="#">How to Apply</a><a href="#">Alumni</a></div>
+    <div class="fc"><h4>Organisation</h4><a href="About">About Us</a><a href="boardMembers">Board Members</a><a href="#">Blogs</a><a href="#">Documents</a></div>
+    <div class="fc"><h4>Support</h4><a href="contact">Contact Us</a><a href="#">FAQs</a><a href="#">Testimonials</a><a href="Login">Login</a></div>
+  </div>
+  <div class="fbot"><span>&copy; 2026 ChildLife India. All rights reserved. &nbsp;|&nbsp; Designed by <a href="https://tsukubatech.com" style="color:var(--pk);text-decoration:none">Tsukuba Tech, Japan</a></span><div class="fdlks"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div>
+</footer>
+
+<a href="#" class="btt" id="btt">↑</a>
+
+<script>
+/* Progress + Nav + BackToTop */
+const pb=document.getElementById('pb'),nav=document.getElementById('nav'),btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>{
+  const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
+  pb.style.width=pct+'%';
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  btt.classList.toggle('show',window.scrollY>400);
+},{passive:true});
+btt.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+
+/* Hamburger */
+const ham=document.getElementById('ham'),mm=document.getElementById('mmenu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mm.classList.toggle('open');});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mm.classList.remove('open');}));
+
+/* Scroll reveal */
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('revealed'),i*80);});},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-s').forEach(el=>ro.observe(el));
+
+/* Count-up */
+function countUp(el,target,dur=2000){let s=0,inc=target/(dur/16);const t=setInterval(()=>{s+=inc;if(s>=target){s=target;clearInterval(t);}el.textContent=Math.floor(s);},16);}
+window.addEventListener('load',()=>{const el=document.getElementById('enrolled');if(el)setTimeout(()=>countUp(el,50),600);});
+
+/* Interactive Doctor — smooth tilt + parallax */
+const stage=document.getElementById('doctorStage'),wrap=document.getElementById('docWrap'),sbg=document.getElementById('stageBg');
+if(stage&&wrap){
+  let mx=0,my=0,tx=0,ty=0;
+  const onMove=e=>{
+    const t=e.touches?e.touches[0]:e;
+    const r=stage.getBoundingClientRect();
+    mx=((t.clientX-r.left)/r.width-.5);
+    my=((t.clientY-r.top)/r.height-.5);
+  };
+  stage.addEventListener('mousemove',onMove);
+  stage.addEventListener('touchmove',e=>{e.preventDefault();onMove(e);},{passive:false});
+  stage.addEventListener('mouseleave',()=>{mx=0;my=0;});
+  stage.addEventListener('touchend',()=>{mx=0;my=0;});
+  /* Bounce on click */
+  stage.addEventListener('click',()=>{
+    wrap.style.transition='transform .3s cubic-bezier(.23,1,.32,1)';
+    const cur=wrap.style.transform;
+    wrap.style.transform=(cur||'translateX(-50%)')+' scale(1.1)';
+    setTimeout(()=>{wrap.style.transition='';wrap.style.transform=cur||'translateX(-50%)';},320);
+  });
+  (function anim(){
+    tx+=(mx-tx)*.055;ty+=(my-ty)*.055;
+    const ry=tx*26,rx=-ty*22;
+    wrap.style.transform=`translateX(-50%) rotateY(${ry}deg) rotateX(${rx}deg)`;
+    if(sbg)sbg.style.transform=`translate(${tx*12}px,${ty*8}px)`;
+    requestAnimationFrame(anim);
+  })();
+}
+
+/* Staggered list reveal */
+const lists=document.querySelectorAll('.alist');
+lists.forEach(list=>{
+  list.querySelectorAll('li').forEach((li,i)=>{li.style.opacity='0';li.style.transform='translateX(-22px)';li.style.transitionDelay=i*80+'ms';});
+  new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.querySelectorAll('li').forEach(li=>{li.style.transition='all .6s cubic-bezier(.23,1,.32,1)';li.style.opacity='1';li.style.transform='none';});},{threshold:.25}).observe(list);
+});
+
+/* Service card shimmer */
+document.querySelectorAll('.srv-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const x=((e.clientX-r.left)/r.width)*100,y=((e.clientY-r.top)/r.height)*100;c.style.background=`radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,1) 0%, #ffffff 60%)`;});
+  c.addEventListener('mouseleave',()=>{c.style.background='';});
+});
+</script>
 </body>
 </html>
